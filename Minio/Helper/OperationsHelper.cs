@@ -128,7 +128,7 @@ public partial class MinioClient : IMinioClient
     }
 
     /// <summary>
-    ///     private helper method. It returns the specified portion or full object from the bucket
+    ///     Получение объекта как Stream. Не происходит Dispose
     /// </summary>
     /// <param name="args">GetObjectArgs Arguments Object encapsulates information like - bucket name, object name etc </param>
     /// <param name="cancellationToken">Optional cancellation token to cancel the operation</param>
@@ -139,7 +139,6 @@ public partial class MinioClient : IMinioClient
             await this.ExecuteTaskAsync(requestMessageBuilder,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
 
-        // возвращаем его
         var stream = response.ContentStream;
 
         // чтобы не происходил Dispose - устанавливаем в null

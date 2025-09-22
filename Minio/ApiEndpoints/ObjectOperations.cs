@@ -55,9 +55,9 @@ public partial class MinioClient : IObjectOperations
     {
         return GetObjectHelper(args, cancellationToken);
     }
-    
+
     /// <summary>
-    ///     Получение файла как Stream объекта.
+    ///     Получение файла как Stream объекта. Внимание, необходимо обязательно сделать Dispose!
     /// </summary>
     /// <param name="args">
     ///     GetObjectArgs Arguments Object encapsulates information like - bucket name, object name, server-side
