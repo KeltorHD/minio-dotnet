@@ -54,6 +54,20 @@ public partial class MinioClient : IMinioClient
         else await GetObjectStreamAsync(args, cancellationToken).ConfigureAwait(false);
         return objStat;
     }
+    
+    /// <summary>
+    ///     Вспомогательный метод для получения файла как Stream
+    /// </summary>
+    /// <param name="args">GetObjectArgs Arguments Object encapsulates information like - bucket name, object name etc </param>
+    /// <param name="cancellationToken">Optional cancellation token to cancel the operation</param>
+    private Task<Stream> GetObjectAsStreamHelper(GetObjectArgs args, CancellationToken cancellationToken = default)
+    {
+        args?.Validate();
+        if (args?.FileName is not null)
+            throw new Exception("Не поддерживается получение Stream из файла!");
+
+        return GetObjectStreamWithoutUsingAsync(args, cancellationToken);
+    }
 
     /// <summary>
     ///     private helper method return the specified object from the bucket
@@ -111,6 +125,26 @@ public partial class MinioClient : IMinioClient
         using var response =
             await this.ExecuteTaskAsync(requestMessageBuilder,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    ///     Получение объекта как Stream. Не происходит Dispose
+    /// </summary>
+    /// <param name="args">GetObjectArgs Arguments Object encapsulates information like - bucket name, object name etc </param>
+    /// <param name="cancellationToken">Optional cancellation token to cancel the operation</param>
+    private async Task<Stream> GetObjectStreamWithoutUsingAsync(GetObjectArgs args, CancellationToken cancellationToken = default)
+    {
+        var requestMessageBuilder = await this.CreateRequest(args).ConfigureAwait(false);
+        using var response =
+            await this.ExecuteTaskAsync(requestMessageBuilder,
+                cancellationToken: cancellationToken).ConfigureAwait(false);
+
+        var stream = response.ContentStream;
+
+        // чтобы не происходил Dispose - устанавливаем в null
+        response.SetContentStreamAsNull();
+
+        return stream;
     }
 
     /// <summary>
