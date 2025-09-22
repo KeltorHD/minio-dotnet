@@ -42,7 +42,7 @@ public sealed class ResponseResult : IDisposable
 
     public Exception Exception { get; set; }
     public HttpRequestMessage Request { get; }
-    public HttpResponseMessage Response { get; }
+    public HttpResponseMessage Response { get; set; }
 
     public HttpStatusCode StatusCode
     {
@@ -65,9 +65,10 @@ public sealed class ResponseResult : IDisposable
         }
     }
 
-    public void SetContentStreamAsNull()
+    public void SetContentStreamAndResponseAsNull()
     {
         stream = null;
+        Response = null;
     }
 
     public ReadOnlyMemory<byte> ContentBytes

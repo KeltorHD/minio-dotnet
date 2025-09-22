@@ -142,7 +142,7 @@ public partial class MinioClient : IMinioClient
         var stream = response.ContentStream;
 
         // чтобы не происходил Dispose - устанавливаем в null
-        response.SetContentStreamAsNull();
+        response.SetContentStreamAndResponseAsNull();
 
         return stream;
     }

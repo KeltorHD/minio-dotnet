@@ -15,6 +15,7 @@
 		<PackageReleaseNotes />
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Company>BI.Qube, MinIO, Inc.</Company>
+		<Version>6.0.6.2</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
