@@ -1,18 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<AssemblyName>Minio</AssemblyName>
-		<RootNamespace>Minio</RootNamespace>
+		<AssemblyName>BI.Qube.Minio</AssemblyName>
+		<RootNamespace>BI.Qube.Minio</RootNamespace>
 		<TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
 		<AssemblyOriginatorKeyFile>..\Minio.snk</AssemblyOriginatorKeyFile>
 		<SignAssembly>true</SignAssembly>
 		<PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
 		<Description>MinIO .NET SDK for Amazon S3 Compatible Cloud Storage.</Description>
 		<Product>Minio</Product>
-		<PackageId>BIQube.Minio</PackageId>
-		<Authors>BIQube, MinIO, Inc.</Authors>
+		<PackageId>BI.Qube.Minio</PackageId>
+		<Authors>BI.Qube, MinIO, Inc.</Authors>
 		<PackageProjectUrl>https://github.com/KeltorHD/minio-dotnet</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/KeltorHD/minio-dotnet</RepositoryUrl>
 		<PackageReleaseNotes />
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Company>BI.Qube, MinIO, Inc.</Company>
 	</PropertyGroup>
 
 	<ItemGroup>

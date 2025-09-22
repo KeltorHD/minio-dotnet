@@ -188,6 +188,22 @@ public interface IObjectOperations
     Task<ObjectStat> GetObjectAsync(GetObjectArgs args, CancellationToken cancellationToken = default);
 
     /// <summary>
+    ///     Получение файла как Stream объекта. Внимание, необходимо обязательно сделать Dispose!
+    /// </summary>
+    /// <param name="args">
+    ///     GetObjectArgs Arguments Object encapsulates information like - bucket name, object name, server-side
+    ///     encryption object, action stream, length, offset
+    /// </param>
+    /// <param name="cancellationToken">Optional cancellation token to cancel the operation</param>
+    /// <exception cref="AuthorizationException">When access or secret key is invalid</exception>
+    /// <exception cref="InvalidBucketNameException">When bucket name is invalid</exception>
+    /// <exception cref="InvalidObjectNameException">When object name is invalid</exception>
+    /// <exception cref="BucketNotFoundException">When bucket is not found</exception>
+    /// <exception cref="ObjectNotFoundException">When object is not found</exception>
+    /// <exception cref="DirectoryNotFoundException">If the directory to copy to is not found</exception>
+    Task<Stream> GetObjectAsStreamAsync(GetObjectArgs args, CancellationToken cancellationToken = default);
+
+    /// <summary>
     ///     Creates object in a bucket fom input stream or filename.
     /// </summary>
     /// <param name="args">
